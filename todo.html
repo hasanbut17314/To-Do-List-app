@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Dai+Banna+SIL:wght@300&family=Josefin+Sans:wght@300&family=Merriweather:ital,wght@1,700&family=Noto+Serif+Vithkuqi&family=REM:wght@200&family=Roboto+Condensed:wght@300&display=swap"
+        rel="stylesheet">
+    <title>To-Do List</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-align: center;
+        font-family: 'REM';
+        background: linear-gradient(to right, rgb(1, 88, 105), rgb(108, 1, 150));
+    }
+
+    h1 {
+        color: orangered;
+        text-transform: uppercase;
+        font-family: 'Merriweather', serif;
+    }
+
+    input {
+        border: 1px solid orangered;
+        border-radius: 14px;
+        padding: 5px 8px;
+        font-size: 0.8em;
+        width: 240px;
+        background-color: transparent;
+        color: white;
+        outline: none;
+    }
+
+    input::placeholder {
+        color: #b8b7b7;
+    }
+
+    #addButton {
+        border: solid transparent;
+        text-transform: uppercase;
+        padding: 2.7px 10px;
+        border-radius: 16px;
+        background-color: orangered;
+        color: white;
+        position: relative;
+        right: 26px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #addButton:hover {
+        background-color: rgb(238, 95, 42);
+    }
+
+    #addButton:active {
+        background: linear-gradient(to right, rgb(38, 77, 53), rgb(50, 50, 200));
+    }
+
+    p {
+        color: white;
+    }
+
+    .task-cont {
+        background: #211f1f;
+        width: 390px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: auto;
+        margin-top: 30px;
+        border-radius: 8px;
+    }
+
+    .para {
+        margin-left: 12px;
+        cursor: pointer;
+    }
+
+    .para.checked{
+        text-decoration: line-through;
+        text-decoration-color: black;
+        text-decoration-thickness: 2px;
+    }
+
+    .delete {
+        background-color: crimson;
+        border: solid transparent;
+        padding: 3px 9px;
+        text-transform: none;
+        border-radius: 16px;
+        margin-right: 12px;
+        cursor: pointer;
+    }
+    .delete:active {
+        background: linear-gradient(to right, rgb(38, 77, 53), rgb(50, 50, 200));
+    }
+</style>
+
+<body>
+    <h1>Tasks</h1>
+    <input id="input" type="text" placeholder="Add a Task"> <button id="addButton">Add</button>
+    <!-- <div class="task-cont"> -->
+    <!-- <p class="para">Hello this is new Task</p> <button id="delete">Delete</button> 
+    </div> -->
+</body>
+<script>
+    const input = document.querySelector("#input");
+    const button = document.querySelector("button");
+    button.addEventListener("click",  () => {
+        if (!input.value) {
+            alert("Please write something!")
+        } else {
+            let newDiv = document.createElement("div");
+            newDiv.classList.add("task-cont");
+            let newTask = document.createElement("p");
+            newTask.innerHTML = input.value;
+            newTask.classList.add("para");
+            let newDel = document.createElement("button");
+            newDel.innerHTML = "Delete"
+            newDel.classList.add("delete")
+            newDiv.appendChild(newTask);
+            newDiv.appendChild(newDel)
+            document.body.appendChild(newDiv)
+            input.value = ""
+            newTask.addEventListener("click", () => {
+                newTask.classList.toggle("checked")
+            })
+            newDel.addEventListener("click", () => {
+                newDiv.remove();
+            })
+        }
+    });
+</script>
+
+</html>
